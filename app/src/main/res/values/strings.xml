@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Librany</string>
+
+    <string name="returnbook">Return</string>
+    <string name="issuebook">Issue</string>
+    <string name="search">Search</string>
+    <string name="catalogue">Catalogue</string>
+
+    <string name="tagline">An ethreality for all bibliophiles</string>
+
+    <string name="title">Title</string>
+    <string name="author">Author</string>
+    <string name="edition">Edition</string>
+    <string name="keyword">Keywords</string>
+
+    <string name="go">Go</string>
+    <string name="ok">Ok</string>
+    <string name="cancel">Cancel</string>
+
+    <string name="searchprompt">Enter the book code </string>
+</resources>

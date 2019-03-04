@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "347736722570",
+    "firebase_url": "https://librany-dde7b.firebaseio.com",
+    "project_id": "librany-dde7b",
+    "storage_bucket": "librany-dde7b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:347736722570:android:af0581710e26d5f1",
+        "android_client_info": {
+          "package_name": "com.example.dhavalbagal.libranyrc"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "347736722570-ph44u6j6uknsgbp7f1qhfc2ubom9rlhk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.dhavalbagal.libranyrc",
+            "certificate_hash": "1286fdf61cc1894bc036a063c4de32274d5b2324"
+          }
+        },
+        {
+          "client_id": "347736722570-mbbhqh24so8kut2tge26u3ldei0vrg20.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyByH8Vo4YRf3uOMDA2EDnaTMDxFF97paM4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "347736722570-mbbhqh24so8kut2tge26u3ldei0vrg20.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
