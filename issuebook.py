@@ -18,8 +18,8 @@ class Issue:
 
         #users.txt files has names of all registered users with each name on a new line
         #Also the first line is left empty
-        self.namelist = self.namelist.split("\n")
-
+        self.namelist = self.namelist.split(",")
+        
         #Create an object of class Book. This object is responsible for all the database transactions
         self.bk = Book()
 
@@ -69,7 +69,7 @@ class Issue:
 
             #Thresholding only those faces who have confidence value less than 70.
             #This is to avoid detecting the users which are not registered with the system.
-            if conf<80:
+            if conf<70:
                 self.draw_rectangle()
                 self.draw_text()
 
