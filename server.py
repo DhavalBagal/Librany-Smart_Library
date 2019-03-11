@@ -1,7 +1,6 @@
 # main.py
 import cv2
 from flask import Flask, render_template, Response, request,abort, jsonify
-from camera import VideoCamera
 import os
 import json
 import qrcode
@@ -69,6 +68,24 @@ def cataloguebook():
     
 @app.route('/searchbook',methods=['GET','POST'])
 def searchbook():
+
+    if not request.json:
+        abort(400)
+        
+    req = request.get_json(force=True)
+    print(req['command'])
+    if req['command']=="SEARCH":
+
+        try:
+            os.system("python3 searchbook.py")
+        except:
+            return jsonify(response='FAILED')
+            
+        return jsonify(response='OK')
+    
+    return jsonify(response='FAILED')
+
+    """
     req = request.get_json(force=True)
     print(req['command'])
     if req['command']=="SEARCH":
@@ -81,7 +98,7 @@ def searchbook():
             return jsonify(response=p)  
         
     
-    return jsonify(response='FAILED')
+    return jsonify(response='FAILED')"""
         
 
 if __name__ == '__main__':
