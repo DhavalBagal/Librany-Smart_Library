@@ -2,10 +2,16 @@ import pyrebase
 import sys
 import datetime
 import time
+import smtplib
+import hashlib 
 
 class Book:
 
     def __init__(self):
+
+        self.username = 'sender-emailid'
+        self.password = 'sender-email-password'
+        self.smtpserver = 'smtp.gmail.com:587'
 
         config = {
           "apiKey": "AIzaSyBxhmLuQ30yH1gVnTTPC7LYuQrpzfxEK4E",
@@ -29,6 +35,38 @@ class Book:
         except :
             print("Invalid credentials or no Internet connectivity!")
             sys.exit(1)
+
+
+    def notify_issue(self, to, name, title, bookid):
+        header= 'From: '+self.username+'\n'
+        header+='To: %s\n' % to
+        header+='Subject: Book issued successfully\n\n'
+
+        bookid = hashlib.md5(bookid.encode()).hexdigest()
+        msg = "Dear "+name+"\n\nThe book '"+title+"' with ID-"+bookid+" has been successfully issued!.\nThank you for using Librany.\n\nThanks and Regards,\nLibrany"
+        msg = header+ msg
+
+        server = smtplib.SMTP(self.smtpserver)
+        server.starttls()
+        server.login(self.username,self.password)
+        problems = server.sendmail(self.username, to, msg)
+        server.quit()
+
+
+    def notify_return(self, to, name, title, bookid):
+        header= 'From: '+self.username+'\n'
+        header+='To: %s\n' % to
+        header+='Subject: Book returned successfully\n\n'
+
+        bookid = hashlib.md5(bookid.encode()).hexdigest()
+        msg = "Dear "+name+"\n\nThe book '"+title+"' with ID-"+bookid+" has been successfully returned!.\nThank you for using Librany.\n\nThanks and Regards,\nLibrany"
+        msg = header+ msg
+
+        server = smtplib.SMTP(self.smtpserver)
+        server.starttls()
+        server.login(self.username, self.password)
+        problems = server.sendmail(self.username, to, msg)
+        server.quit()
 
     #Input is userid and bookid. The task is to update book and user details
     def update_details(self,userid, bookid):
@@ -87,6 +125,12 @@ class Book:
                         #Update book and user details after the TRANSACTION table is updated
                         self.update_details(userid, bookid)
 
+                        to= usr["Email"]
+                        name =usr['Name'].split()[0]
+                        title = book["Title"]
+
+                        self.notify_issue(to, name, title, bookid)
+
                         return "IssueDone"
                     else :
                         return "AllowanceExceeded"
@@ -127,6 +171,12 @@ class Book:
                     Return_ts = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d@%H:%M:%S')
                     
                     self.db.child('TRANSACTIONS').child(k1).update({'Return_ts':Return_ts}, self.user['idToken'])
+
+            to= usr["Email"]
+            name =usr['Name'].split()[0]
+            title = book["Title"]
+            
+            self.notify_return(to, name, title, bookid)
 
     def updatelocation(self, bookid, loc):
         
